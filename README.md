@@ -1,80 +1,75 @@
+[update-readmes]   Mode: rewrite — migrating to template structure...
 # xdotool
 
-C++ bindings for Node.js to handle X11 using the full power of libxdo.
+[![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/xdotool)
 
-## Installation
+<!-- AI:start:what-it-does -->
+_Description pending._
+<!-- AI:end:what-it-does -->
 
-```
-yarn add xdotool
-```
+## Architecture
 
-## Examples
+<!-- AI:start:architecture -->
+_Architecture documentation pending._
+<!-- AI:end:architecture -->
 
-### Key logging
+## Install
 
-A few lines of code and you're able to spy what key strokes are being pressed on the keyboard:
+<!-- Add installation instructions here. This section is yours — the AI will not modify it. -->
 
-```ts
-const bindings = new XdoToolBindings();
-const kbd = new KeyboardAsync(bindings);
-while(true) { // Keeps printing until you kill the process
-    const buffer = Buffer.from(await kbd.queryKeymap(), 0, 32);
-    for(let j = 0; j < 32; j++) {
-        for(let h = 0; h < 8; h++) {
-            if(buffer[j] & (1 << h)) {
-                const keycode = j * 8 + h;
-                const keysym = kbd.keycodeToKeysym(keycode);
-                console.log(kbd.keysymToString(keysym));
-            }
-        }
-    }
-}
+```bash
+git clone https://github.com/Interested-Deving-1896/xdotool.git
+cd xdotool
 ```
 
-### Activate window
+## Usage
 
-In the example below we look for windows with the name of `Visual Studio Code`. If any valid match is found, we focus it.
+<!-- Add usage examples here. This section is yours — the AI will not modify it. -->
 
-```ts
-import { XdoToolAsync, XdoToolBindings } from 'xdotool';
+## Configuration
 
-// Activate Visual Studio Code window
-function activateVisualStudioCodeWindow() {
-    const xdo = new XdoToolAsync(new XdoToolBindings());
-    const windows = await xdo.searchWindows({
-        winclassname: 'Visual Studio Code'
-    });
-    for(const w of windows) {
-        if(!(await xdo.windowHasProperty(w, '_NET_WM_DESKTOP'))) {
-            continue;
-        }
-        await xdo.activateWindow(w);
-        break;
-    }
-}
+<!-- Document configuration options here. This section is yours — the AI will not modify it. -->
+
+## CI
+
+<!-- AI:start:ci -->
+_CI documentation pending._
+<!-- AI:end:ci -->
+
+## Mirror chain
+
+<!-- AI:start:mirror-chain -->
+This repo is maintained in [`Interested-Deving-1896/xdotool`](https://github.com/Interested-Deving-1896/xdotool) and mirrored through:
+
+```
+Interested-Deving-1896/xdotool  ──►  OpenOS-Project-OSP/xdotool  ──►  OpenOS-Project-Ecosystem-OOC/xdotool
 ```
 
-### Screenshot
+Changes flow downstream automatically via the hourly mirror chain in
+[`fork-sync-all`](https://github.com/Interested-Deving-1896/fork-sync-all).
+Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-Deving-1896`.
+<!-- AI:end:mirror-chain -->
 
-Our X11-based screenshooter is only capable of returning raw 8-bit RGB image format data at the moment but it is very fast and memory efficient. Getting a screenshot is super simple:
+## Contributors
 
-```ts
-import { ScreenshooterAsync, XdoToolBindings } from 'xdotool';
-import { promises as fs } from 'fs';
+<!-- AI:start:contributors -->
+_Contributors pending._
+<!-- AI:end:contributors -->
 
-async function screenshot() {
-    const xdo = new XdoToolBindings();
-    const screenshooter = new ScreenshooterAsync(xdo);
-    const arrayBuffer = await screenshooter.getImage();
-    fs.writeFile(`${__dirname}/screenshot_${new Date()}.rgb`, Buffer.from(arrayBuffer));
-}
-```
+## Origins
 
-For obvious reasons, the `ArrayBuffer` returned by `screenshooter.getImage` is reused on every call. So, unless you create a new instance of screenshooter, if you try to keep the reference, it'll be changed if you're calling this method elsewhere at the same time.
+<!-- AI:start:origins -->
+_Original project — no upstream fork._
+<!-- AI:end:origins -->
 
-## Requirements
+## Resources
 
-- Boost
-- CMake
-- libx11
-- xdotool
+<!-- AI:start:resources -->
+_No additional resource files found._
+<!-- AI:end:resources -->
+
+## License
+
+<!-- AI:start:license -->
+<!-- License not detected — add a LICENSE file to this repo. -->
+<!-- AI:end:license -->
